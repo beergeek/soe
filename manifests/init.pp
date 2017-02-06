@@ -45,7 +45,7 @@ class soe (
 ) {
 
   if $::os['name'] == 'windows' {
-      $mco_dir = 'C:/ProgramData/puppetlabs/mcollective/plugins/mcollective'
+    $mco_dir = 'C:/ProgramData/puppetlabs/mcollective/plugins/mcollective'
     } else {
       File {
         owner => 'root',
@@ -55,7 +55,6 @@ class soe (
       $mco_dir = '/opt/puppetlabs/mcollective/plugins/mcollective'
     }
     $mco_svc = 'mcollective'
-  }
 
   if $enable_agent or $enable_app {
     $dll_ensure = file
