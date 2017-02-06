@@ -58,29 +58,35 @@ class soe (
   }
 
   if $enable_agent or $enable_app {
-    file { "${mco_dir}/agent/soe.ddl":
-      ensure => file,
-      source => 'puppet:///modules/soe/soe_agent.ddl',
-      notify => Service[$mco_svc],
-    }
+    $dll_ensure = file
+  } else {
+    $dll_ensure = absent
   }
-
   if $enable_agent {
-    file { "${mco_dir}/agent/soe.rb":
-      ensure => file,
-      source => 'puppet:///modules/soe/soe_agent.rb',
-      notify => Service[$mco_svc],
-    }
+    $agent_ensure = file
+  } else {
+    $agent_ensure = absent
   }
-
   if $enable_app {
-    file { "${mco_dir}/application/soe_check.rb":
-      ensure => file,
-      source => 'puppet:///modules/soe/soe_app.rb',
-    }
+    $app_ensure = file
+  } else {
+    $app_ensure = absent
   }
 
+  file { "${mco_dir}/agent/soe.ddl":
+    ensure => $dll_ensure,
+    source => 'puppet:///modules/soe/soe_agent.ddl',
+    notify => Service[$mco_svc],
+  }
 
+  file { "${mco_dir}/agent/soe.rb":
+    ensure => $agent_ensure,
+    source => 'puppet:///modules/soe/soe_agent.rb',
+    notify => Service[$mco_svc],
+  }
 
-
+  file { "${mco_dir}/application/soe_check.rb":
+    ensure => $app_ensure,
+    source => 'puppet:///modules/soe/soe_app.rb',
+  }
 }
