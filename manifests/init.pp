@@ -27,7 +27,7 @@
 #
 # @example
 #   # note types of quotes for `resource_hash`
-#   mco rpc soe check_soe resource_hash='{"file" => ["/etc","/tmp"],"user" => ["root","ftp"]}'
+#   mco soe_check --resource_hash='{"file" => ["/etc","/tmp"],"user" => ["root","ftp"]}'
 #
 # Authors
 # -------
@@ -74,7 +74,7 @@ class soe (
   }
 
   if $enable_app {
-    file { "${mco_dir}/application/soe.rb":
+    file { "${mco_dir}/application/soe_check.rb":
       ensure => file,
       source => 'puppet:///modules/soe/soe_app.rb',
     }
