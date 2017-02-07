@@ -45,16 +45,21 @@ class soe (
 ) {
 
   if $::os['name'] == 'windows' {
-    $mco_dir = 'C:/ProgramData/puppetlabs/mcollective/plugins/mcollective'
-    } else {
-      File {
-        owner => 'root',
-        group => 'root',
-        mode  => '0644',
-      }
-      $mco_dir = '/opt/puppetlabs/mcollective/plugins/mcollective'
+    File {
+      owner => 'S-1-5-32-544',
+      group => 'S-1-5-32-544',
+      mode  => '0644',
     }
-    $mco_svc = 'mcollective'
+    $mco_dir = 'C:/ProgramData/puppetlabs/mcollective/plugins/mcollective'
+  } else {
+    File {
+      owner => 'root',
+      group => 'root',
+      mode  => '0644',
+    }
+    $mco_dir = '/opt/puppetlabs/mcollective/plugins/mcollective'
+  }
+  $mco_svc = 'mcollective'
 
   if $enable_agent or $enable_app {
     $dll_ensure = file
