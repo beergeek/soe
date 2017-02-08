@@ -40,8 +40,8 @@
 # Copyright 2017 Brett Gray, unless otherwise noted.
 #
 class soe (
-  Bool $enable_agent = true,
-  Bool $enable_app   = false,
+  Boolean $enable_agent = true,
+  Boolean $enable_app   = false,
 ) {
 
   if $::os['name'] == 'windows' {
