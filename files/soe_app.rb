@@ -21,6 +21,7 @@ module MCollective
         output = mc.check_soe(:resource_hash => configuration[:resource_hash], :options => options)
 
         output.each do |result|
+          puts "#{result[:sender]}:"
           puts JSON.pretty_generate(JSON.load(result[:data][:return_resources].to_json))
         end
 
